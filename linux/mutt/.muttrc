@@ -1,0 +1,134 @@
+set folder      = imaps://<IMAP_URL>/
+set imap_user   = <USER>
+#set imap_pass   = your-imap-password
+set spoolfile   = +INBOX
+mailboxes       = +INBOX 
+
+set imap_check_subscribed
+set postponed = +Drafts
+
+set from = $imap_user
+set realname = "<NAME>" 
+#set postponed="+[Gmail]/Drafts"
+set header_cache=~/.mutt/cache/headers
+set message_cachedir=~/.mutt/cache/bodies
+set certificate_file=~/.mutt/certificates
+set move = no
+unset imap_passive
+set imap_keepalive = 300
+set mail_check = 120
+set check_new = yes
+
+set charset="UTF-8"
+set send_charset="UTF-8"
+set locale="zh_CN.UTF-8"
+charset-hook ^us-ascii$ GB18030
+charset-hook !UTF-8 GB18030
+#set strict_mime=no
+set assumed_charset="UTF-8"
+set rfc2047_parameters=yes
+
+set include
+set indent_str="> "
+set header=no
+
+alternates <ALT EMAIL ADDRESS>
+
+set ascii_chars=yes
+set pager_stop=yes
+set fast_reply
+set menu_scroll
+
+ignore *
+unignore From:
+unignore To:
+unignore Reply-To:
+#unignore Subject:
+unignore Date:
+unignore CC:
+unignore BCC:
+unignore X-Label:
+unignore Organization:
+hdr_order Subject: To: CC: BCC: From: Date: Reply-To: X-Label: Organization:
+
+source ~/.mutt/alias
+set alias_file=~/.mutt/alias
+set sort=threads
+set sort_aux=date
+
+set pager_index_lines=5
+set status_on_top
+set mark_old=no
+
+## 自定义界面颜色
+## --   --     前景色   背景色
+color status   cyan     default     # 状态栏
+color indicator white     default     # 当前行
+color hdrdefault blue     default     # 信头
+color attachment blue     default     # 附件
+color quoted   green     default     # 引用
+color tree     cyan     default     # 线索
+color message   white     default     # 提示信息
+color signature cyan     default     # 签名
+color normal   default   default     # 普通文字
+## 特殊邮件头
+color header   white       default       "^Subject:"
+color header   brightyellow default       "^To:"
+color header   brightyellow default       "^CC:"
+color header   brightyellow default       "^BCC:"
+color header   yellow     default       "^From:"
+color header   yellow     default       "^Reply-To:"
+color header   yellow     default       "^Date:"
+color header   brightblue   brightdefault   "^X-Label:"
+## 特殊状态
+color index     brightyellow default       "~F" # 长期标记
+color index     yellow     default       "~T" # 短期标记
+color index     brightred   default       "~D" # 删除
+color index     brightgreen   default       "~U" # 未读信件
+
+#set index_format="%Z %?M?%-22.22n (%M)&%-26.26n? >> %?y?[%Y] %s&%s? %> %?X?/& ? %{%b%d}"
+set index_format="%4C %Z %{%b %d} %-15.15L (%4l) %N %s"
+
+set from="<EMAIL ADDRESS>"
+
+auto_view text/html
+
+# Store message headers locally to speed things up.
+# # If hcache is a folder, Mutt will create sub cache folders for each account which may speeds things up even more.
+#set header_cache = ~/.cache/mutt
+#
+# # Store messages locally to speed things up, like searching message bodies.
+# # Can be the same folder as header_cache.
+# # This will cost important disk usage according to your e-mail amount.
+#set message_cachedir = "~/.cache/mutt"
+#
+# # Specify where to save and/or look for postponed messages.
+# set postponed = +[Gmail]/Drafts
+#
+# # Allow Mutt to open new imap connection automatically.
+#
+# # Keep IMAP connection alive by polling intermittently (time in seconds).
+#
+# # How often to check for new mail (time in seconds).
+#
+#
+source ~/.mutt/mutt-colors-solarized/mutt-colors-solarized-dark-16.muttrc
+
+#bind pager G bottom
+#bind index G bottom
+#bind browser G bottom
+set certificate_file = "~/.mutt/certificates"
+set ssl_starttls=yes
+set ssl_force_tls=yes
+set smtp_url="smtp://<SMTP SERVER>/"
+#set smtp_pass=""
+#
+score "~N" +4  #new email
+score "~D" -5  #deleted email
+score "~O" +1  #old email
+score "~F" +5  #Flagged email
+score "~T" +1  #Tagged email
+score "~p" +10 #to me
+score "~P" +5  #from me
+score "~Q" +1  #replied
+

@@ -1,0 +1,3 @@
+* Location *
+
+`<HOME>/.tmux.conf`
